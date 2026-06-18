@@ -1,11 +1,12 @@
 import "@/lib/auth-env";
+import { getAuthSecret } from "@/lib/auth-env";
 import type { NextAuthConfig } from "next-auth";
 import { APP_PATHS } from "@/lib/app-urls";
 import { ADMIN_SESSION_COOKIE } from "@/lib/auth-cookies";
 
 export const authConfig: NextAuthConfig = {
   trustHost: true,
-  secret: process.env.AUTH_SECRET,
+  secret: getAuthSecret(),
   session: { strategy: "jwt" },
   cookies: {
     sessionToken: {
