@@ -21,6 +21,7 @@ export const authConfig: NextAuthConfig = {
   },
   pages: {
     signIn: APP_PATHS.adminLogin,
+    error: APP_PATHS.adminLogin,
   },
   providers: [],
   callbacks: {
