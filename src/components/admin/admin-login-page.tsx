@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { toast } from "sonner";
 import {
   Loader2,
   Shield,
   Lock,
   Sparkles,
-  ExternalLink,
   Users,
   KeyRound,
   LayoutDashboard,
@@ -17,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { APP_PATHS, APP_LINKS } from "@/lib/app-urls";
+import { APP_PATHS } from "@/lib/app-urls";
 import { COMPANY_NAME } from "@/lib/constants";
 
 export function AdminLoginPage() {
@@ -118,7 +116,7 @@ export function AdminLoginPage() {
             </div>
 
             <p className="text-xs text-violet-300/50">
-              Demo: hafiz@gmail.com / 12345678
+              © 2026 {COMPANY_NAME}. Admin access only.
             </p>
           </div>
 
@@ -191,15 +189,9 @@ export function AdminLoginPage() {
               </Button>
             </form>
 
-            <div className="mt-6 rounded-xl border border-violet-500/10 bg-violet-950/40 p-3 text-center text-[11px] text-violet-200/60">
-              <p className="font-medium text-violet-200/90">Employee website (port 3000)</p>
-              <Link
-                href={APP_LINKS.websiteLogin()}
-                className="mt-1 inline-flex items-center gap-1 font-semibold text-violet-300 hover:text-violet-200 hover:underline"
-              >
-                {APP_LINKS.websiteLogin()}
-                <ExternalLink className="h-3 w-3" />
-              </Link>
+            <div className="mt-6 flex items-center justify-center gap-1.5 text-[11px] text-violet-200/50">
+              <Lock className="h-3 w-3 shrink-0" />
+              <span>Authorized administrators only</span>
             </div>
           </div>
         </div>
