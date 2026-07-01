@@ -6,6 +6,7 @@ import { getAuthSecret } from "@/lib/auth-env";
 import { APP_PATHS } from "@/lib/app-urls";
 import {
   ADMIN_SESSION_COOKIE,
+  clearAdminSessionCookie,
   clearSharedAuthCookies,
   isValidAdminToken,
 } from "@/lib/auth-cookies";
@@ -34,6 +35,13 @@ export async function middleware(request: NextRequest) {
   const isLogin = pathname.startsWith(APP_PATHS.adminLogin);
 
   if (isLogin) {
+    const sessionExpired = request.nextUrl.searchParams.get("error") === "session_expired";
+    if (sessionExpired) {
+      const response = NextResponse.next();
+      clearAdminSessionCookie(response);
+      return response;
+    }
+
     if (isLoggedIn) {
       return NextResponse.redirect(new URL(APP_PATHS.adminDashboard, request.url));
     }

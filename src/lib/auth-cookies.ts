@@ -23,6 +23,20 @@ export function clearSharedAuthCookies(response: {
   }
 }
 
+export function clearAdminSessionCookie(response: {
+  cookies: {
+    set: (
+      name: string,
+      value: string,
+      options?: { path?: string; maxAge?: number }
+    ) => void;
+  };
+}) {
+  response.cookies.set(ADMIN_SESSION_COOKIE, "", { path: "/", maxAge: 0 });
+  response.cookies.set(`__Secure-${ADMIN_SESSION_COOKIE}`, "", { path: "/", maxAge: 0 });
+  clearSharedAuthCookies(response);
+}
+
 export function isValidAdminToken(
   token: { role?: string; accessToken?: unknown } | null
 ): token is { role: "ADMIN"; accessToken: string } {
