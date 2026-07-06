@@ -37,7 +37,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#4c1d95",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
 };
 
 export default async function RootLayout({
@@ -56,7 +59,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`admin-portal dark ${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full`}
+      className={`admin-portal ${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full`}
     >
       <body
         className="min-h-full antialiased text-foreground"

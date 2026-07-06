@@ -4,6 +4,7 @@ export const APP_PATHS = {
   adminDashboard: "/",
   adminUsers: "/users",
   adminBudget: "/budget",
+  adminExpenses: "/expenses",
 } as const;
 
 function ensureHttpsUrl(value: string): string {
@@ -38,6 +39,7 @@ export const APP_LINKS = {
   adminLogin: (base?: string) => appUrl(APP_PATHS.adminLogin, base),
   adminUsers: (base?: string) => appUrl(APP_PATHS.adminUsers, base),
   adminBudget: (base?: string) => appUrl(APP_PATHS.adminBudget, base),
+  adminExpenses: (base?: string) => appUrl(APP_PATHS.adminExpenses, base),
   websiteLogin: () => `${getWebsiteBaseUrl()}/auth/login`,
   websiteDashboard: () => `${getWebsiteBaseUrl()}/dashboard`,
 } as const;

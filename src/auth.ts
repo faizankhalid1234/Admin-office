@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "@/auth.config";
 import { loginSchema } from "@/lib/validations";
-import { apiPath } from "@/lib/api-config";
+import { fetchFromBackend } from "@/lib/api-config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -25,7 +25,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           });
           if (!parsed.success) return null;
 
-          const res = await fetch(apiPath("/api/auth/login"), {
+          const res = await fetchFromBackend("/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(parsed.data),

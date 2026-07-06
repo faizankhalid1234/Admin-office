@@ -262,12 +262,12 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
   return (
     <>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="admin-glow-card border-violet-500/20 bg-card/40">
+        <Card className="admin-glow-card border-border/60 bg-card/40">
           <CardContent className="flex items-center gap-3 p-4">
-            <Users className="h-5 w-5 text-violet-400" />
+            <Users className="h-5 w-5 text-primary" />
             <div>
-              <p className="text-xs text-violet-200/60">Total users</p>
-              <p className="text-xl font-bold text-white">{stats.total}</p>
+              <p className="text-xs text-muted-foreground">Total users</p>
+              <p className="text-xl font-bold text-foreground">{stats.total}</p>
             </div>
           </CardContent>
         </Card>
@@ -275,8 +275,8 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
           <CardContent className="flex items-center gap-3 p-4">
             <UserCheck className="h-5 w-5 text-emerald-400" />
             <div>
-              <p className="text-xs text-violet-200/60">Active</p>
-              <p className="text-xl font-bold text-white">{stats.active}</p>
+              <p className="text-xs text-muted-foreground">Active</p>
+              <p className="text-xl font-bold text-foreground">{stats.active}</p>
             </div>
           </CardContent>
         </Card>
@@ -284,17 +284,17 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
           <CardContent className="flex items-center gap-3 p-4">
             <UserMinus className="h-5 w-5 text-amber-400" />
             <div>
-              <p className="text-xs text-violet-200/60">Resigned / inactive</p>
-              <p className="text-xl font-bold text-white">{stats.inactive}</p>
+              <p className="text-xs text-muted-foreground">Resigned / inactive</p>
+              <p className="text-xl font-bold text-foreground">{stats.inactive}</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="admin-glow-card border-violet-500/20 bg-card/40">
+        <Card className="admin-glow-card border-border/60 bg-card/40">
           <CardContent className="flex items-center gap-3 p-4">
-            <Shield className="h-5 w-5 text-violet-400" />
+            <Shield className="h-5 w-5 text-primary" />
             <div>
-              <p className="text-xs text-violet-200/60">Admins</p>
-              <p className="text-xl font-bold text-white">{stats.admins}</p>
+              <p className="text-xs text-muted-foreground">Admins</p>
+              <p className="text-xl font-bold text-foreground">{stats.admins}</p>
             </div>
           </CardContent>
         </Card>
@@ -303,12 +303,12 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
           <div className="relative flex-1 sm:max-w-xs">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-violet-300/50" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/50" />
             <Input
               placeholder="Search name or email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 border-violet-500/20 bg-card/40"
+              className="pl-9 border-border/60 bg-card/40"
             />
           </div>
           <Select
@@ -317,7 +317,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
               if (v) setRoleFilter(v as typeof roleFilter);
             }}
           >
-            <SelectTrigger className="w-full sm:w-[140px] border-violet-500/20 bg-card/40">
+            <SelectTrigger className="w-full sm:w-[140px] border-border/60 bg-card/40">
               <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
@@ -332,7 +332,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
               if (v) setStatusFilter(v as typeof statusFilter);
             }}
           >
-            <SelectTrigger className="w-full sm:w-[140px] border-violet-500/20 bg-card/40">
+            <SelectTrigger className="w-full sm:w-[140px] border-border/60 bg-card/40">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
@@ -344,7 +344,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
         </div>
         <Button
           onClick={openCreate}
-          className="w-full min-h-11 sm:w-auto bg-violet-600 hover:bg-violet-500 text-white shadow-violet-900/40"
+          className="w-full min-h-11 sm:w-auto"
         >
           <Plus className="mr-2 h-4 w-4" />
           Add User
@@ -352,10 +352,10 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
       </div>
 
       {selected.size > 0 && (
-        <Card className="admin-glow-card border-violet-500/30 bg-violet-950/30">
+        <Card className="admin-glow-card border-border bg-muted/40">
           <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
-            <p className="text-sm text-violet-200/80">
-              <span className="font-semibold text-white">{selected.size}</span> selected
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">{selected.size}</span> selected
             </p>
             <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
               <Select
@@ -364,7 +364,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
                   if (v) setBulkAction(v as BulkAction);
                 }}
               >
-                <SelectTrigger className="w-full sm:w-[200px] border-violet-500/20 bg-card/40">
+                <SelectTrigger className="w-full sm:w-[200px] border-border/60 bg-card/40">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -378,7 +378,6 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
               <Button
                 onClick={handleBulkApply}
                 disabled={loading}
-                className="bg-violet-600 hover:bg-violet-500"
               >
                 Apply
               </Button>
@@ -387,7 +386,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
         </Card>
       )}
 
-      <Card className="admin-glow-card border-violet-500/20 bg-card/40">
+      <Card className="admin-glow-card border-border/60 bg-card/40">
         <CardContent className="p-0">
           <div className="hidden md:block">
             <Table>
@@ -398,7 +397,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
                       type="checkbox"
                       checked={allFilteredSelected}
                       onChange={toggleSelectAll}
-                      className="h-4 w-4 rounded border-violet-500/40 accent-violet-600"
+                      className="h-4 w-4 rounded border-border accent-primary"
                       aria-label="Select all"
                     />
                   </TableHead>
@@ -429,7 +428,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
                           type="checkbox"
                           checked={selected.has(user.id)}
                           onChange={() => toggleSelect(user.id)}
-                          className="h-4 w-4 rounded border-violet-500/40 accent-violet-600"
+                          className="h-4 w-4 rounded border-border accent-primary"
                           aria-label={`Select ${user.name}`}
                         />
                       </TableCell>
@@ -501,7 +500,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
                   type="checkbox"
                   checked={selected.has(user.id)}
                   onChange={() => toggleSelect(user.id)}
-                  className="h-4 w-4 shrink-0 rounded accent-violet-600"
+                  className="h-4 w-4 shrink-0 rounded accent-primary"
                 />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-sm">{user.name}</p>
@@ -549,7 +548,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
         </CardContent>
       </Card>
 
-      <p className="text-xs text-violet-300/50">
+      <p className="text-xs text-muted-foreground/50">
         Django-style: deactivate (resign) blocks login without deleting data. Delete permanently
         removes the user and their expenses.
       </p>
@@ -623,7 +622,7 @@ export function AdminUsersManager({ users: initial, currentUserId }: AdminUsersM
               <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={loading} className="bg-violet-600 hover:bg-violet-500">
+              <Button type="submit" disabled={loading}>
                 {loading ? "Saving..." : editing ? "Update" : "Create"}
               </Button>
             </DialogFooter>

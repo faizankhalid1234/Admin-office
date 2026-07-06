@@ -327,57 +327,124 @@
     }
   }
 
-  /* ── Admin portal (separate site theme) ── */
+  /* ── Admin portal theme (professional slate + indigo) ── */
   .admin-portal {
-    --background: oklch(0.14 0.03 280);
-    --foreground: oklch(0.96 0.01 280);
-    --card: oklch(0.18 0.035 280);
-    --card-foreground: oklch(0.96 0.01 280);
-    --popover: oklch(0.18 0.035 280);
-    --popover-foreground: oklch(0.96 0.01 280);
-    --primary: oklch(0.72 0.16 285);
-    --primary-foreground: oklch(0.14 0.03 280);
-    --secondary: oklch(0.22 0.04 280);
-    --secondary-foreground: oklch(0.92 0.02 280);
-    --muted: oklch(0.22 0.035 280);
-    --muted-foreground: oklch(0.68 0.04 280);
-    --accent: oklch(0.26 0.06 285);
-    --accent-foreground: oklch(0.95 0.02 285);
-    --destructive: oklch(0.62 0.22 25);
-    --border: oklch(0.28 0.04 280);
-    --input: oklch(0.24 0.04 280);
-    --ring: oklch(0.72 0.16 285);
+    --background: oklch(0.985 0.004 260);
+    --foreground: oklch(0.22 0.025 260);
+    --card: oklch(1 0.002 260);
+    --card-foreground: oklch(0.22 0.025 260);
+    --popover: oklch(1 0.002 260);
+    --popover-foreground: oklch(0.22 0.025 260);
+    --primary: oklch(0.42 0.12 264);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.96 0.008 260);
+    --secondary-foreground: oklch(0.32 0.03 260);
+    --muted: oklch(0.96 0.006 260);
+    --muted-foreground: oklch(0.48 0.02 260);
+    --accent: oklch(0.94 0.02 264);
+    --accent-foreground: oklch(0.32 0.08 264);
+    --destructive: oklch(0.58 0.22 25);
+    --border: oklch(0.9 0.01 260);
+    --input: oklch(0.93 0.01 260);
+    --ring: oklch(0.42 0.12 264);
+    --chart-1: oklch(0.42 0.12 264);
+    --chart-2: oklch(0.55 0.1 200);
+    --chart-3: oklch(0.62 0.12 160);
+    --chart-4: oklch(0.5 0.1 300);
+    --chart-5: oklch(0.55 0.1 30);
+    --sidebar: oklch(0.2 0.03 260);
+    --sidebar-foreground: oklch(0.94 0.01 260);
+    --sidebar-primary: oklch(0.55 0.12 264);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.26 0.03 260);
+    --sidebar-accent-foreground: oklch(0.96 0.01 260);
+    --sidebar-border: oklch(0.3 0.025 260);
+    --sidebar-ring: oklch(0.55 0.12 264);
+    color-scheme: light;
+  }
+
+  .admin-portal.dark {
+    --background: oklch(0.16 0.02 260);
+    --foreground: oklch(0.95 0.01 260);
+    --card: oklch(0.2 0.022 260);
+    --card-foreground: oklch(0.95 0.01 260);
+    --popover: oklch(0.2 0.022 260);
+    --popover-foreground: oklch(0.95 0.01 260);
+    --primary: oklch(0.62 0.14 264);
+    --primary-foreground: oklch(0.14 0.02 260);
+    --secondary: oklch(0.24 0.025 260);
+    --secondary-foreground: oklch(0.92 0.01 260);
+    --muted: oklch(0.24 0.025 260);
+    --muted-foreground: oklch(0.65 0.02 260);
+    --accent: oklch(0.26 0.04 264);
+    --accent-foreground: oklch(0.94 0.02 264);
+    --destructive: oklch(0.65 0.2 25);
+    --border: oklch(0.28 0.02 260);
+    --input: oklch(0.26 0.02 260);
+    --ring: oklch(0.62 0.14 264);
+    --chart-1: oklch(0.62 0.14 264);
+    --chart-2: oklch(0.68 0.1 200);
+    --chart-3: oklch(0.72 0.1 160);
+    --chart-4: oklch(0.65 0.1 300);
+    --chart-5: oklch(0.68 0.1 30);
+    --sidebar: oklch(0.14 0.025 260);
+    --sidebar-foreground: oklch(0.92 0.01 260);
+    --sidebar-primary: oklch(0.62 0.14 264);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.22 0.03 260);
+    --sidebar-accent-foreground: oklch(0.95 0.01 260);
+    --sidebar-border: oklch(0.26 0.02 260);
+    --sidebar-ring: oklch(0.62 0.14 264);
     color-scheme: dark;
   }
 
   .admin-bg {
-    background:
-      radial-gradient(ellipse 80% 60% at 10% 0%, oklch(0.35 0.12 285 / 0.35) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 90% 100%, oklch(0.4 0.1 320 / 0.25) 0%, transparent 50%),
-      linear-gradient(165deg, oklch(0.12 0.04 280) 0%, oklch(0.1 0.03 260) 45%, oklch(0.08 0.02 250) 100%);
+    background-color: var(--background);
+    background-image:
+      radial-gradient(ellipse 70% 50% at 0% 0%, oklch(0.55 0.1 264 / 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 45% at 100% 100%, oklch(0.5 0.08 260 / 0.05) 0%, transparent 50%);
+  }
+
+  .admin-portal.dark .admin-bg {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 0% 0%, oklch(0.45 0.1 264 / 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 45% at 100% 100%, oklch(0.4 0.08 260 / 0.1) 0%, transparent 50%);
   }
 
   .admin-grid-bg {
     background-image:
-      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+      linear-gradient(oklch(0.4 0.05 264 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.4 0.05 264 / 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
+  .admin-portal.dark .admin-grid-bg {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+  }
+
   .admin-sidebar-gradient {
-    background: linear-gradient(180deg, oklch(0.11 0.04 285) 0%, oklch(0.08 0.03 260) 100%);
-    border-right: 1px solid oklch(0.72 0.16 285 / 0.15);
+    background: var(--sidebar);
+    color: var(--sidebar-foreground);
+    border-right: 1px solid var(--sidebar-border);
   }
 
   .admin-glow-card {
-    @apply rounded-2xl border border-violet-500/20 bg-card/80 shadow-2xl shadow-violet-950/40 backdrop-blur-xl;
+    @apply rounded-2xl border border-border/60 bg-card/95 shadow-lg backdrop-blur-sm;
     box-shadow:
-      0 0 0 1px oklch(0.72 0.16 285 / 0.08),
-      0 24px 48px -12px oklch(0.2 0.08 285 / 0.5);
+      0 1px 2px oklch(0.2 0.02 260 / 0.06),
+      0 8px 24px -8px oklch(0.2 0.02 260 / 0.1);
+  }
+
+  .admin-portal.dark .admin-glow-card {
+    box-shadow:
+      0 0 0 1px oklch(1 0 0 / 0.04),
+      0 12px 32px -12px oklch(0 0 0 / 0.45);
   }
 
   .admin-stat-card {
-    @apply relative overflow-hidden rounded-xl border border-violet-500/15 bg-card/60 p-4 backdrop-blur-sm;
+    @apply relative overflow-hidden rounded-xl border border-border/60 bg-card p-4 shadow-sm;
   }
 
   .admin-stat-card::before {
@@ -387,7 +454,8 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, oklch(0.72 0.16 285), oklch(0.65 0.14 320));
+    background: linear-gradient(90deg, var(--primary), oklch(0.55 0.1 200));
+    opacity: 0.85;
   }
 
   .admin-login-orb {
@@ -395,7 +463,7 @@
   }
 
   @keyframes admin-orb-float {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-    50% { transform: translate(-20px, 15px) scale(1.08); opacity: 0.85; }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(-20px, 15px) scale(1.08); opacity: 0.75; }
   }
 }

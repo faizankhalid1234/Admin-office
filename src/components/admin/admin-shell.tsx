@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Users,
   Wallet,
+  Receipt,
   LogOut,
   ExternalLink,
   Menu,
@@ -16,17 +17,23 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { LanguageSelect } from "@/components/language/language-select";
+import { AdminThemeToggle } from "@/components/admin/admin-theme-toggle";
+import { useTranslation } from "@/components/language/language-provider";
 import { APP_PATHS, APP_LINKS } from "@/lib/app-urls";
 import { COMPANY_NAME } from "@/lib/constants";
+import type { TranslationKey } from "@/lib/i18n/translations";
 
-const navItems = [
-  { href: APP_PATHS.adminDashboard, label: "Dashboard", icon: LayoutDashboard },
-  { href: APP_PATHS.adminUsers, label: "Users", icon: Users },
-  { href: APP_PATHS.adminBudget, label: "Budget", icon: Wallet },
+const navItems: { href: string; labelKey: TranslationKey; icon: typeof LayoutDashboard }[] = [
+  { href: APP_PATHS.adminDashboard, labelKey: "nav.dashboard", icon: LayoutDashboard },
+  { href: APP_PATHS.adminUsers, labelKey: "nav.users", icon: Users },
+  { href: APP_PATHS.adminBudget, labelKey: "nav.budget", icon: Wallet },
+  { href: APP_PATHS.adminExpenses, labelKey: "nav.expenses", icon: Receipt },
 ];
 
 function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   return (
     <nav className="flex-1 space-y-1 p-3">
@@ -45,25 +52,25 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             className={cn(
               "flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
               active
-                ? "bg-violet-600 text-white shadow-lg shadow-violet-900/40"
-                : "text-violet-200/70 hover:bg-violet-500/10 hover:text-white"
+                ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-md"
+                : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             )}
           >
             <Icon className="h-4 w-4 shrink-0" />
-            {item.label}
+            {t(item.labelKey)}
           </Link>
         );
       })}
 
-      <div className="my-4 border-t border-violet-500/15" />
+      <div className="my-4 border-t border-sidebar-border" />
 
       <Link
         href={APP_LINKS.websiteDashboard()}
         onClick={onNavigate}
-        className="flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-violet-200/60 hover:bg-white/5 hover:text-violet-100"
+        className="flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
       >
         <ExternalLink className="h-4 w-4 shrink-0" />
-        Employee Website
+        {t("nav.employeeWebsite")}
       </Link>
     </nav>
   );
@@ -72,60 +79,69 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="admin-bg flex min-h-screen min-h-[100dvh]">
       <aside className="admin-sidebar-gradient hidden w-64 shrink-0 flex-col md:flex">
-        <div className="border-b border-violet-500/10 p-5">
+        <div className="border-b border-sidebar-border p-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600/30 ring-1 ring-violet-400/20">
-              <Shield className="h-5 w-5 text-violet-200" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sidebar-primary/20 ring-1 ring-sidebar-primary/25">
+              <Shield className="h-5 w-5 text-sidebar-primary" />
             </div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-violet-300/70">
-                Admin Site
+              <p className="text-[10px] font-bold uppercase tracking-widest text-sidebar-foreground/60">
+                {t("app.adminSite")}
               </p>
-              <p className="text-sm font-bold text-white">{COMPANY_NAME}</p>
+              <p className="text-sm font-bold text-sidebar-foreground">{COMPANY_NAME}</p>
             </div>
           </div>
         </div>
         <SidebarNav />
-        <div className="border-t border-violet-500/10 p-4">
-          <p className="mb-2 truncate text-xs text-violet-200/50">{session?.user?.email}</p>
+        <div className="border-t border-sidebar-border p-4">
+          <p className="mb-2 truncate text-xs text-sidebar-foreground/50">{session?.user?.email}</p>
           <Button
             variant="ghost"
             size="sm"
-            className="w-full justify-start text-violet-200/70 hover:bg-violet-500/10 hover:text-white"
+            className="w-full justify-start text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             onClick={() => signOut({ callbackUrl: APP_PATHS.adminLogin })}
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Sign out
+            {t("nav.signOut")}
           </Button>
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 items-center justify-between border-b border-violet-500/10 bg-black/20 px-4 md:hidden">
-          <div className="flex items-center gap-2">
-            <Shield className="h-5 w-5 text-violet-400" />
-            <span className="text-sm font-bold text-white">Admin Panel</span>
+        <header className="flex h-14 items-center justify-between border-b border-border/60 bg-card/80 px-4 backdrop-blur-md">
+          <div className="flex items-center gap-2 md:hidden">
+            <Shield className="h-5 w-5 text-primary" />
+            <span className="text-sm font-bold text-foreground">{t("app.adminPanel")}</span>
           </div>
-          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-            <SheetTrigger
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-violet-200 hover:bg-violet-500/10"
-            >
-              <Menu className="h-5 w-5" />
-            </SheetTrigger>
-            <SheetContent
-              side="left"
-              className="admin-sidebar-gradient border-violet-500/20 p-0 w-72"
-            >
-              <div className="border-b border-violet-500/10 p-5">
-                <p className="text-sm font-bold text-white">Admin Control Center</p>
-              </div>
-              <SidebarNav onNavigate={() => setMenuOpen(false)} />
-            </SheetContent>
-          </Sheet>
+
+          <div className="hidden md:block" />
+
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <LanguageSelect className="h-9 w-[108px] border-border/60 bg-background text-xs sm:w-[120px]" />
+            <AdminThemeToggle className="relative h-9 w-9 rounded-lg" />
+
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+              <SheetTrigger className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden">
+                <Menu className="h-5 w-5" />
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="admin-sidebar-gradient w-72 border-sidebar-border p-0"
+              >
+                <div className="border-b border-sidebar-border p-5">
+                  <p className="text-sm font-bold text-sidebar-foreground">
+                    {t("app.controlCenter")}
+                  </p>
+                </div>
+                <SidebarNav onNavigate={() => setMenuOpen(false)} />
+              </SheetContent>
+            </Sheet>
+          </div>
         </header>
 
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">

@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { apiPath } from "./api-config";
+import { fetchFromBackend } from "./api-config";
 import { APP_PATHS } from "./app-urls";
 import { redirectSessionExpired } from "./session-redirect";
 
@@ -21,15 +21,10 @@ export async function serverApi<T>(
 
   let res: Response;
   try {
-    res = await fetch(apiPath(path), {
-      ...init,
-      headers,
-      cache: "no-store",
-    });
-  } catch (error) {
-    console.error("[serverApi] Backend unreachable:", apiPath(path), error);
+    res = await fetchFromBackend(path, { ...init, headers });
+  } catch {
     throw new Error(
-      "Cannot connect to backend API. Start it with: cd backend office && npm run dev (port 5000)"
+      "Cannot connect to backend API. Start it with: cd \"backend office\" && npm run dev (port 5000), or set BACKEND_FALLBACK_URL in .env.local"
     );
   }
 
