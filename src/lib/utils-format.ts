@@ -1,4 +1,7 @@
-export function normalizeCurrency(value: string): "USD" | "CLP" {
+export type CurrencyCode = "USD" | "JPY" | "CLP";
+
+export function normalizeCurrency(value: string): CurrencyCode {
+  if (value === "JPY") return "JPY";
   if (value === "CLP") return "CLP";
   return "USD";
 }
@@ -11,6 +14,13 @@ export function formatCurrency(amount: number, currency: string): string {
       currency: "CLP",
       maximumFractionDigits: 0,
     }).format(amount);
+  }
+  if (code === "JPY") {
+    return new Intl.NumberFormat("ja-JP", {
+      style: "currency",
+      currency: "JPY",
+      maximumFractionDigits: 0,
+    }).format(Math.round(amount));
   }
   return new Intl.NumberFormat("en-US", {
     style: "currency",

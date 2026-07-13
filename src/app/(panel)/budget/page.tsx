@@ -29,11 +29,11 @@ export default async function AdminBudgetPage() {
           used: budgetData.used,
           remaining: budgetData.remaining,
           percentage: budgetData.percentage,
-          currency: (budgetData.budget?.currency as "USD" | "CLP" | undefined) ?? "USD",
+          currency: (budgetData.budget?.currency as "USD" | "JPY" | "CLP" | undefined) ?? "USD",
         }}
         history={history.map((b) => ({
           ...b,
-          currency: b.currency as "USD" | "CLP",
+          currency: b.currency as "USD" | "JPY" | "CLP",
         }))}
       />
     </div>

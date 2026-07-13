@@ -34,7 +34,7 @@ interface BudgetData {
   used: number;
   remaining: number;
   percentage: number;
-  currency?: "USD" | "CLP";
+  currency?: "USD" | "JPY" | "CLP";
 }
 
 interface BudgetHistory {
@@ -42,7 +42,7 @@ interface BudgetHistory {
   month: number;
   year: number;
   amount: number;
-  currency?: "USD" | "CLP";
+  currency?: "USD" | "JPY" | "CLP";
 }
 
 const MONTHS = [
@@ -63,7 +63,7 @@ export function AdminBudgetManager({
     month: current.month,
     year: current.year,
     amount: current.amount > 0 ? current.amount.toString() : "",
-    currency: (current.currency ?? "USD") as "USD" | "CLP",
+    currency: (current.currency ?? "USD") as "USD" | "JPY" | "CLP",
   });
 
   async function handleSubmit(e: React.FormEvent) {
@@ -181,20 +181,36 @@ export function AdminBudgetManager({
               </div>
               <div className="space-y-2">
                 <Label className="text-muted-foreground">Currency</Label>
-                <Select
-                  value={form.currency}
-                  onValueChange={(v) =>
-                    v && setForm({ ...form, currency: v as "USD" | "CLP" })
-                  }
-                >
-                  <SelectTrigger className="border-border/60 bg-muted text-foreground">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="USD">USD</SelectItem>
-                    <SelectItem value="CLP">CLP</SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className="grid grid-cols-3 gap-2">
+                  {(
+                    [
+                      { value: "USD", label: "US Dollar", symbol: "$" },
+                      { value: "JPY", label: "Japanese Yen", symbol: "¥" },
+                      { value: "CLP", label: "Chilean Peso", symbol: "CLP" },
+                    ] as const
+                  ).map((opt) => {
+                    const selected = form.currency === opt.value;
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => setForm({ ...form, currency: opt.value })}
+                        className={
+                          selected
+                            ? "rounded-xl border border-primary bg-primary/10 px-3 py-2.5 text-left ring-1 ring-primary/30"
+                            : "rounded-xl border border-border/60 bg-muted px-3 py-2.5 text-left hover:border-primary/40"
+                        }
+                      >
+                        <span className="block text-base font-semibold text-foreground">
+                          {opt.symbol}
+                        </span>
+                        <span className="block text-[11px] text-muted-foreground">
+                          {opt.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
               <div className="space-y-2">
                 <Label className="text-muted-foreground">
